@@ -1,0 +1,804 @@
+/* --- VARIÁVEIS GLOBAIS --- */
+:root {
+    --color-black: #0D0D0D;
+    --color-black-soft: #1a1a1a;
+    --color-nude: #8C7A70;
+    --color-nude-light: #BFB8AE;
+    --color-brown: #59473C;
+    --color-offwhite: #F2EFEB;
+    
+    --font-primary: 'Poppins', sans-serif;
+    --font-display: 'Cinzel', serif;
+    --font-script: 'Great Vibes', cursive;
+    
+    --gradient-gold: linear-gradient(135deg, var(--color-nude) 0%, var(--color-brown) 100%);
+    --gradient-dark: linear-gradient(180deg, var(--color-black) 0%, #1a1a1a 100%);
+    
+    --spacing-container: 1200px;
+    --radius-card: 16px;
+    --radius-btn: 50px;
+}
+
+/* --- RESET BÁSICO --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    background-color: var(--color-black);
+    color: var(--color-offwhite);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- UTILITÁRIOS --- */
+.container {
+    width: 100%;
+    max-width: var(--spacing-container);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+.container-narrow { max-width: 800px; }
+.text-center { text-align: center; }
+.section { padding: 5rem 0; }
+.relative { position: relative; }
+.z-10 { z-index: 10; }
+
+.header-center {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem; /* Centraliza o bloco e dá um espaçamento inferior */
+}
+
+/* --- TIPOGRAFIA --- */
+.brand-title {
+    font-family: var(--font-script);
+    font-size: 3rem;
+    color: var(--color-nude);
+    line-height: 1;
+}
+.brand-subtitle {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--color-nude-light);
+    text-transform: uppercase;
+}
+.section-tag {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--color-nude);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.section-title {
+    font-family: var(--font-script);
+    font-size: 3rem;
+    color: var(--color-offwhite);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+.highlight-text { color: var(--color-nude); font-weight: 600; }
+.text-offwhite { color: var(--color-offwhite); }
+.text-nude { color: var(--color-nude); }
+
+.section-text {
+    max-width: 800px; /* Limita a largura para melhorar a leitura */
+    margin: 0 auto;   /* Centraliza o bloco de texto */
+    font-size: 1.1rem;
+    color: var(--color-nude-light);
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* --- HERO SECTION --- */
+.hero-section {
+    min-height: 100vh;
+    background-color: #000; /* Alterado para preto puro */
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 2rem;
+}
+.bg-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.hero-grid {
+    display: grid;
+    gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+    .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+    }
+    .hero-content { text-align: left; }
+}
+
+.mockup-container {
+    max-width: 500px; /* Define um limite de largura */
+    width: 100%; /* Garante responsividade em telas menores que 450px */
+    margin: 0 auto; /* Centraliza o container horizontalmente se sobrar espaço */
+    position: relative; /* Necessário para ancorar o brilho */
+}
+
+.mockup-glow {
+    position: absolute;
+    inset: -20px; /* Faz o brilho vazar para fora, criando um contorno */
+    
+    /* NOVA COR: Branco com 40% de opacidade (gera um branco-cinza contra o fundo preto) */
+    background: rgba(255, 255, 255, 0.4); 
+    
+    filter: blur(100px); /* Mantém o desfoque para criar o efeito de luz */
+    opacity: 0.55; /* Aumentado para 1 pois a opacidade já está definida no RGBA acima */
+    z-index: -1; /* Coloca o brilho atrás da imagem */
+    border-radius: 50px; /* Garante que o brilho seja circular, combinando com a forma do mockup */
+}
+
+.mockup-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.3)); /* Simula o shadow do SVG */
+}
+
+.tagline {
+    color: #73645D;
+    font-family: var(--font-display); /* Usa a fonte Cinzel para elegância */
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.hero-headline {
+    font-family: var(--font-script);
+    font-size: 3.8rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: 400; /* Adicionado para remover o negrito automático */
+}
+.hero-subheadline {
+    font-size: 1.rem;
+    color: var(--color-nude-light);
+    margin-bottom: 2rem;
+}
+.benefits-list { list-style: none; margin-bottom: 2rem; }
+.benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: rgba(242, 239, 235, 0.9);
+}
+.icon-check {
+    width: 24px; height: 24px;
+    background: rgba(140, 122, 112, 0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-nude);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* --- BUTTON CTA (SENIOR TOUCH) --- */
+.btn-cta {
+    position: relative;
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--gradient-gold);
+    color: var(--color-offwhite);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: var(--radius-btn);
+    box-shadow: 0 4px 20px rgba(140, 122, 112, 0.4);
+    transition: all 0.3s ease;
+    overflow: hidden; /* Importante para o brilho */
+    font-weight: 600;
+}
+.btn-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(140, 122, 112, 0.6);
+    background: linear-gradient(135deg, #a39185 0%, #6b5649 100%); /* Cor ligeiramente mais clara */
+}
+/* Efeito de Brilho (Shimmer) */
+.shine-effect {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent
+    );
+    transition: 0.5s;
+}
+.btn-cta:hover .shine-effect {
+    left: 100%;
+    transition: 0.7s ease-in-out;
+}
+.btn-full {
+    width: 100%;
+    text-align: center;
+    display: block;
+    padding: 1.2rem; /* Botão mais gordo */
+}
+
+/* --- CARDS --- */
+/* Container do Grid de Cards */
+.cards-grid {
+    display: grid;
+    gap: 2rem; /* Espaçamento entre os cards */
+    margin-top: 3rem;
+    /* Por padrão (mobile), é 1 coluna. Não precisa definir grid-template-columns aqui */
+}
+
+/* MÁGICA DA RESPONSIVIDADE: 3 Colunas em telas acima de 1024px */
+@media (min-width: 1024px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas de larguras iguais */
+        align-items: stretch; /* Garante que os cards tenham a mesma altura */
+    }
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3.5rem;
+    background: linear-gradient(145deg, rgba(89, 71, 60, 0.3) 0%, rgba(13, 13, 13, 0.8) 100%);
+    border: 1px solid rgba(140, 122, 112, 0.3);
+    border-radius: var(--radius-card);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.card:hover { transform: translateY(-5px); }
+
+/* --- IMAGENS DOS CARTÕES DE PROCESSO --- */
+.card-image {
+    width: 180px; /* Tamanho da moldura da imagem */
+    height: 180px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%; /* Faz um círculo perfeito */
+    border: 2px solid rgba(140, 122, 112, 0.4); /* Borda nude subtil */
+    padding: 4px; /* Cria um pequeno espaço entre a imagem e a borda */
+    background: transparent;
+    overflow: hidden; /* Garante que nada sai do círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preenche o espaço sem distorcer */
+    border-radius: 50%; /* Arredonda a imagem em si */
+    transition: transform 0.5s ease;
+}
+
+/* Efeito ao passar o rato (hover) no cartão */
+.card:hover .card-image img {
+    transform: scale(1.1); /* Um ligeiro zoom na imagem */
+}
+
+/* Opcional: Remover a regra .card-icon se não for mais utilizada */
+/* .card-icon { ... } */
+
+
+
+/* 1. Ajuste dos Rótulos (Início, Meio, Fim) */
+.card-step {
+    font-family: var(--font-display); /* Mesma família da tagline */
+    font-size: 0.8rem; /* Tamanho pequeno e elegante */
+    letter-spacing: 0.2em; /* Espaçamento generoso entre letras */
+    text-transform: uppercase;
+    color: #72645C; /* Cor solicitada */
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+/* 2. Ajuste dos Títulos Principais (Reconhecimento, etc) */
+.card-title {
+    font-family: var(--font-display); /* Garante Cinzel */
+    font-size: 1.2rem;
+    color: var(--color-offwhite);
+    text-transform: none; /* Garante que o texto fique como está no HTML */
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+}
+
+/* 3. Ajuste das Descrições (Texto corrido) */
+.card-text {
+    font-size: 0.9rem; /* Reduzido para ficar menor */
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 280px; /* Garante que o texto não estique demais */
+    margin: 0 auto;
+}
+
+/* --- DECORATION --- */
+.divider-elegant {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-nude), transparent);
+    margin: 1.5rem auto;
+}
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-nude), transparent);
+    opacity: 0.3;
+    max-width: var(--spacing-container);
+    margin: 0 auto;
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- STORY SECTION --- */
+.story-section {
+    background-color: #191919;
+    position: relative; /* Necessário para posicionar o gradiente */
+    padding-bottom: 8rem; /* Aumenta o espaço inferior para caber o gradiente */
+    overflow: hidden; /* Garante que nada vaze */
+}
+
+/* Gradiente de conexão com a próxima seção */
+.story-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 500px; /* Altura da área de transição */
+    background: linear-gradient(to bottom, transparent, #0D0D0D); /* Transição suave para o preto do tema */
+    pointer-events: none; /* Permite selecionar o texto por baixo */
+    z-index: 1;
+}
+
+/* Container do texto da história */
+.story-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px; /* Limita a largura para leitura confortável */
+    margin: 0 auto;   /* Centraliza o bloco na tela */
+    color: rgba(255, 255, 255, 0.85); /* Cor base do texto */
+    font-size: 0.90rem;
+    line-height: 1.8;
+}
+
+/* Citação inicial (Marcação Vermelha) */
+.story-content .quote {
+    font-family: var(--font-primary);
+    font-style: italic;
+    font-size: 1.2rem; /* Maior que o texto normal */
+    font-weight: 400;  /* Mais peso */
+    text-align: center;
+    margin-bottom: 3rem; /* Espaço generoso antes do texto começar */
+    color: var(--color-offwhite);
+}
+
+/* Espaçamento entre parágrafos (Marcação Amarela) */
+.story-content p {
+    margin-bottom: 1.5rem; /* Respiro entre cada bloco de texto */
+    text-align: left; /* Garante alinhamento à esquerda para leitura */
+}
+
+/* Frase de impacto final (Marcação Verde) */
+.story-emphasis {
+    text-align: center !important; /* Força centralização */
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-offwhite);
+    display: block;
+}
+
+/* Texto final centralizado (Marcação Azul) */
+.story-content p:last-child {
+    text-align: center;
+    font-weight: 500;
+}
+
+/* --- RESCUE SECTION --- */
+.rescue-section {
+    padding: 6rem 0;
+    /* Gradiente Radial: Centro #191716, dissipando para o preto das bordas */
+    background: radial-gradient(circle at center, #191716 0%, var(--color-black) 50%);
+}
+
+.rescue-title {
+    font-family: var(--font-display); /* Cinzel */
+    font-size: 2.6rem; /* Tamanho grande e imponente */
+    color: var(--color-offwhite);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400; /* Cinzel já tem peso visual */
+    margin-bottom: 1.5rem;
+}
+
+.rescue-highlight {
+    color: #59473C; /* Tom de marrom mais escuro/apagado para "É RESGATE" conforme a imagem */
+}
+
+.rescue-section .divider-elegant {
+    margin: 0 auto 2rem; /* Centraliza o divisor */
+    width: 60px; /* Um pouco menor para elegância */
+    opacity: 0.6;
+}
+
+.rescue-section .section-text {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- PRESENTATION SECTION --- */
+.presentation-section {
+    background-color: var(--color-black);
+    padding: 6rem 0;
+}
+
+/* Adicionado para centralizar o conteúdo no mobile */
+.presentation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os filhos (título, divisor, botão) */
+}
+
+/* --- GRID DE 2 COLUNAS --- */
+.presentation-grid {
+    display: grid;
+    gap: 4rem; /* Espaço entre o texto e o card */
+    /* Por padrão (mobile), é 1 coluna */
+    grid-template-columns: 1fr; 
+}
+
+/* O Container da coluna direita */
+.presentation-visual {
+    position: relative; /* Serve de âncora para o brilho */
+    z-index: 0; /* Cria um novo contexto de pilha */
+    display: flex;
+    justify-content: center;
+}
+
+/* A MÁGICA ACONTECE AQUI: Lado a Lado em telas maiores que 768px (Tablet/Desktop) */
+@media (min-width: 768px) {
+    .presentation-grid {
+        grid-template-columns: 1fr 1fr; /* Divide em 2 frações iguais */
+        align-items: center; /* Centraliza verticalmente o texto com o card */
+    }
+    /* Força o texto para a esquerda e o card para a direita */
+    .presentation-content {
+        display: block; /* Reverte o flexbox */
+        align-items: initial; /* Reseta o alinhamento */
+        text-align: left; /* Alinha o texto à esquerda */
+    }
+}
+
+.text-block p {
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+/* Botão Compacto */
+.btn-compact {
+    padding: 0.8rem 2.5rem;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* --- IMAGEM DE APRESENTAÇÃO (MOCKUP) --- */
+.mockup-presentation {
+    width: 100%;
+    max-width: 450px; /* Tamanho ideal para alinhar com o texto ao lado */
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* NOVO: Glow sutil atrás do mockup */
+.mockup-presentation::before {
+    content: '';
+    position: absolute;
+    inset: 10px; /* Fica um pouco mais rente à imagem que o da Hero */
+    background: rgba(255, 255, 255, 0.15); /* Branco com transparência bem sutil (15%) */
+    filter: blur(60px); /* Desfoque suave */
+    z-index: -1; /* Joga a luz para trás da imagem */
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+.presentation-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Aplica uma sombra elegante na própria imagem do mockup */
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.6)); 
+}
+
+/* Estilo específico para o divisor nesta seção (alinhado à esquerda) */
+.presentation-content .divider-elegant.divider-left {
+    margin: 1.5rem 0 2rem 0;
+    width: 120px; /* Largura balanceada */
+    height: 1px;
+    border: none;
+    /* GRADIENTE SIMÉTRICO: Transparente -> Cor -> Transparente */
+    /* O centro (50%) é a cor sólida, e as pontas (0% e 100%) são transparentes */
+    background: linear-gradient(90deg, transparent 0%, var(--color-nude) 50%, transparent 100%);
+    opacity: 0.8;
+}
+
+/* --- HOW IT WORKS SECTION --- */
+.how-it-works-section {
+    background-color: #1A1A1A; /* Alterado de #121212 */
+    padding: 6rem 0;
+}
+
+.steps-grid {
+    display: grid;
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+/* Responsividade: 3 colunas no desktop */
+@media (min-width: 768px) {
+    .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: flex-start; /* Alinha pelo topo */
+    }
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* O Círculo Numérico */
+.step-circle {
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Borda fina e elegante */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display); /* Fonte serifada (Cinzel/Playfair) */
+    font-size: 2rem;
+    color: var(--color-nude); /* Cor dourada/nude */
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.step-item:hover .step-circle {
+    border-color: var(--color-nude);
+    background: rgba(140, 122, 112, 0.05);
+}
+
+/* Título do Passo (DIAGNÓSTICO, etc) */
+.step-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--color-offwhite);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+/* Descrição do Passo */
+.step-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 300px; /* Limita a largura para leitura confortável */
+    margin: 0 auto;
+}
+
+/* --- BONUS SECTION --- */
+.bonus-section {
+    background-color: var(--color-black); /* Mantém o fundo preto padrão */
+    padding: 6rem 0;
+}
+
+.section-desc-center {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Grid de 3 Colunas */
+.bonus-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .bonus-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Card do Bônus */
+.bonus-card {
+    background: #1E1C1B; /* Nova cor aplicada */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Alinha o preço no final */
+    height: 100%;
+}
+
+.bonus-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(186, 154, 137, 0.3); /* Cor nude sutil */
+}
+
+/* Cabeçalho do Card (Ícone + Tag) */
+.bonus-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.bonus-icon {
+    font-size: 1.5rem;
+}
+
+.bonus-tag {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5); /* Cinza elegante */
+    text-transform: uppercase;
+}
+
+/* Título e Descrição */
+.bonus-title {
+    font-family: var(--font-display); /* Cinzel */
+    color: var(--color-offwhite);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+    text-transform: uppercase; /* Conforme a imagem */
+}
+
+.bonus-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Preço (Riscado + Grátis) */
+.bonus-price {
+    margin-top: auto; /* Empurra para o fundo do card */
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.price-old {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+}
+
+.price-free {
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.05em;
+    font-size: 1rem;
+}
+
+/* --- OFFER SECTION (COM ILUMINAÇÃO) --- */
+.offer-section {
+    background: #191919; /* Cor de fundo exata solicitada */
+    /* Mantém o espaçamento interno */
+    padding: 6rem 0;
+    text-align: center;
+}
+
+/* --- FAQ --- */
+.faq-container { display: flex; flex-direction: column; gap: 1rem; }
+.faq-item {
+    background: rgba(89, 71, 60, 0.1);
+    border: 1px solid rgba(140, 122, 112, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+}
+.faq-toggle {
+    width: 100%;
+    padding: 1.25rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: none; border: none;
+    color: var(--color-offwhite);
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+}
+.faq-icon { width: 20px; height: 20px; transition: transform 0.3s; color: var(--color-nude); }
+.faq-toggle[aria-expanded="true"] .faq-icon { transform: rotate(180deg); }
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 1.25rem;
+    color: var(--color-nude-light);
+    font-size: 0.9rem;
+}
+.faq-toggle[aria-expanded="true"] + .faq-content {
+    padding-bottom: 1.25rem;
+}
+
+/* --- PRICING CARD --- */
+.pricing-card {
+    /* Cor da Borda Exata */
+    border: 1px solid #5D5D5F;
+    /* Efeito de Luz/Blur ao redor do card */
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0 0 120px 30px #2C2928; /* Blur alto e spread para simular luz */
+    /* Mantém outras propriedades necessárias */
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    background: #1E1C1B; /* Mantendo o fundo interno do card (ajuste se necessário) */
+    position: relative;
+    z-index: 1;
+}
+.pricing-amount { padding: 1.5rem 0; border-top: 1px solid rgba(140, 122, 112, 0.2); border-bottom: 1px solid rgba(140, 122, 112, 0.2); margin: 1.5rem 0; }
+.current-price { font-family: var(--font-display); font-size: 3.5rem; color: var(--color-nude); line-height: 1; }
+
+.old-price-label .line-through {
+    text-decoration: line-through;
+}
+.payment-info {
+    margin-top: 0.5rem;
+    font-size: 0.88rem;
+}
+.pricing-features { list-style: none; text-align: left; margin-bottom: 2rem; color: var(--color-nude-light); }
+.pricing-features li { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; }
+.pricing-features .icon { width: 20px; color: var(--color-nude); }
+.trust-badges { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+.trust-badges .badge { display: flex; align-items: center; gap: 0.25rem; }
+.icon-small { width: 16px; }
+
+/* --- FOOTER --- */
+.main-footer {
+    padding: 3rem 0;
+    background-color: var(--color-black);
+    border-top: 1px solid rgba(140, 122, 112, 0.1);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.75rem;
+}
