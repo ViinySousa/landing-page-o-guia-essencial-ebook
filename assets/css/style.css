@@ -522,10 +522,10 @@ body {
     content: '';
     position: absolute;
     inset: 10px; /* Fica um pouco mais rente à imagem que o da Hero */
-    background: rgba(255, 255, 255, 0.15); /* Branco com transparência bem sutil (15%) */
-    filter: blur(60px); /* Desfoque suave */
+    background: rgba(255, 255, 255, 0.10); /* Branco com transparência bem sutil (15%) */
+    filter: blur(40px); /* Desfoque suave */
     z-index: -1; /* Joga a luz para trás da imagem */
-    border-radius: 20px;
+    border-radius: 120px;
     pointer-events: none;
 }
 
@@ -801,4 +801,98 @@ body {
     border-top: 1px solid rgba(140, 122, 112, 0.1);
     color: rgba(255,255,255,0.4);
     font-size: 0.75rem;
+}
+
+/* Oculta a quebra de linha em telas grandes (Desktop) */
+.mobile-break {
+    display: none;
+}
+
+/* =========================================
+   AJUSTES RESPONSIVOS MOBILE (FLUID DESIGN)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Título Hero Fluido */
+    .hero-headline {
+        /* A mágica: Mínimo 2.5rem, cresce com a tela (8vw), Máximo 3.2rem */
+        font-size: clamp(2.5rem, 8vw, 3.2rem); 
+        line-height: 1.15;
+        margin-bottom: 1.5rem;
+        /* Evita que palavras grandes vazem a tela */
+        word-wrap: break-word; 
+    }
+
+    /* Ativa a quebra de linha apenas no Mobile (incluindo telas até 430px) */
+    .mobile-break {
+        display: block;
+    }
+
+    /* 2. Subtítulo Hero */
+    .hero-subheadline {
+        font-size: 0.95rem; /* Ligeiramente menor para leitura confortável */
+        margin-bottom: 2rem;
+    }
+
+    /* 3. Ajuste do Botão CTA para não quebrar linha */
+    .cta-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; /* Mantém alinhado à esquerda no mobile se preferir, ou mude para center */
+    }
+
+    .btn-cta {
+        width: 100%; /* Ocupa tudo o que pode... */
+        max-width: 340px; /* ...mas não passa desse limite seguro */
+        padding: 1rem 1rem; /* Reduz o padding lateral para caber em telas estreitas */
+        font-size: 0.85rem; /* Fonte um pinguinho menor */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        white-space: nowrap; /* Tenta forçar o texto a ficar em uma linha só */
+    }
+
+    /* 4. Ajuste da lista de benefícios na Hero */
+    .benefits-list li {
+        font-size: 0.9rem;
+        align-items: flex-start; /* Se o texto quebrar, o ícone de check continua no topo */
+    }
+    
+    .icon-check {
+        margin-top: 2px; /* Alinha o ícone com a primeira linha de texto */
+    }
+
+    /* Ajuste de respiro para tipografia cursiva no mobile */
+    .section-title {
+        font-size: clamp(2.2rem, 8vw, 2.8rem); /* Mantém o tamanho fluido e responsivo */
+        line-height: 1.3; /* Relaxa o espaço vertical para as letras não se atropelarem */
+        word-spacing: 0.2em; /* Adiciona um espaço extra na horizontal entre cada palavra */
+        margin-bottom: 1.5rem;
+    }
+
+    /* 6. Ajuste fino de tipografia para a seção Resgate (Mobile) */
+    .rescue-title {
+        /* Reduz o tamanho da fonte significativamente (fluido entre 1.4rem e 2rem) */
+        font-size: clamp(1.9rem, 5vw, 2rem);
+        line-height: 1.3; /* Relaxa o espaço vertical para a quebra manual ficar harmoniosa */
+        letter-spacing: 0.1em; /* Mantém o afastamento elegante das letras */
+        margin-bottom: 2rem; /* Garante espaço até o divisor dourado */
+        text-align: center; /* Reforça a centralização, mesmo se quebrar linha */
+        width: 100%; /* Ocupa toda a largura disponível */
+    }
+
+    /* Expansão do Blur de Fundo da Seção Resgate estrito para Mobile */
+    .rescue-section {
+        /* Usamos ellipse e porcentagens válidas para esticar a luz para as laterais */
+        background: radial-gradient(ellipse 100% 90% at center, #191716 0%, #000000 100%) !important;
+    }
+}
+
+/* Ajuste extra para celulares MUITO pequenos (ex: iPhone SE - 320px/375px) */
+@media (max-width: 380px) {
+    .btn-cta {
+        font-size: 0.75rem; /* Reduz ainda mais a fonte do botão só em telas super apertadas */
+        white-space: normal; /* Permite quebrar linha só se for estritamente necessário */
+    }
 }
