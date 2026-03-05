@@ -828,10 +828,12 @@ body {
         display: block;
     }
 
-    /* 2. Subtítulo Hero */
+    /* 8. Ajuste de hierarquia visual dos textos da Hero (Mobile) */
     .hero-subheadline {
-        font-size: 0.95rem; /* Ligeiramente menor para leitura confortável */
-        margin-bottom: 2rem;
+        font-size: 0.85rem; /* Reduzido para devolver o destaque ao título */
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.7); /* Suaviza levemente a cor para menos contraste que o H1 */
     }
 
     /* 3. Ajuste do Botão CTA para não quebrar linha */
@@ -855,12 +857,16 @@ body {
 
     /* 4. Ajuste da lista de benefícios na Hero */
     .benefits-list li {
-        font-size: 0.9rem;
+        font-size: 0.82rem; /* Fonte menor e elegante */
+        margin-bottom: 0.7rem; /* Aproxima um pouco os itens da lista */
         align-items: flex-start; /* Se o texto quebrar, o ícone de check continua no topo */
     }
     
     .icon-check {
-        margin-top: 2px; /* Alinha o ícone com a primeira linha de texto */
+        width: 20px; /* Ícone um pouquinho menor para acompanhar o texto */
+        height: 20px;
+        font-size: 0.65rem;
+        margin-top: 1px; /* Alinhamento fino com o texto reduzido */
     }
 
     /* Ajuste de respiro para tipografia cursiva no mobile */
